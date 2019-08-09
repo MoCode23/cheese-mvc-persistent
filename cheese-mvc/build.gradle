@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
 	id 'java'
 }
 
@@ -27,3 +27,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+bootRun{
+	sourceResources sourceSets.main
+}
