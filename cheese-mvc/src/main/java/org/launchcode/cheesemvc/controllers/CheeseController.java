@@ -91,7 +91,7 @@ public class CheeseController {
 
     @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
     public String category(Model model, @PathVariable int categoryId) {
-        model.addAttribute("cheeses", categoryDao.findById(categoryId));
+        model.addAttribute("cheeses", categoryDao.findOne(categoryId));
         model.addAttribute("title", "My Cheeses");
         return "cheese/index";
     }
@@ -100,7 +100,7 @@ public class CheeseController {
     public String displayEditCheeseForm(Model model, @PathVariable int cheeseId) {
 
         model.addAttribute("title", "Edit Cheese");
-        model.addAttribute("cheese", cheeseDao.findById(cheeseId));
+        model.addAttribute("cheese", cheeseDao.findOne(cheeseId));
         model.addAttribute("categories", categoryDao.findAll());
         return "cheese/edit";
     }
