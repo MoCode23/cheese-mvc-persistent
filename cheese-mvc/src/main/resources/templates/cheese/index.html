@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Title</title>
-</head>
-<body>
+<head th:replace="fragments :: head"></head>
+<body class = "container body-content">
 <!-- th:text="${title}" gets info from cheese controller add.Attribute and inserts value into view.-->
 <h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
 <!-- If ${cheeses} doesn't exist display message in <p> tags
      also calls cheeses.size, because cheeses is a list, to make sure list isn't empty.-->
-
 <p th:unless="${cheeses} and ${cheeses.size()}"> No Cheese!</p>
 
-<!--Created link to add.html form.-->
-<a href="/cheese/add">Add Cheese</a>
+<table class = "table">
+    <tr>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+    </tr>
+    <!--th:each is for loop. cheese is the temp variable and ${cheeses} is in controller.-->
+    <tr th:each="cheese : ${cheeses}">
+        <td th:text="Edit"> </td>
+        <!--calling the name and description fields in the model-->
+        <td th:text="${cheese.name}"></td>
+        <td th:text="${cheese.description}"></td>
+        <!--calling type in the Cheese model and then name of the type from the cheeseType model -->
+        <td th:text="${cheese.category.getName()}"></td>
+    </tr>
+</table>
 
-<ul>
-    <!--th:each is for loop. cheese is the temp variable and ${cheeses} is in controller.
-    Temp variable is displayed in view as list items using ${cheeses}-->
-    <li th:each="cheese : ${cheeses}" th:text="${cheese}"></li>
-</ul>
+<a th:href="@{cheese/add}">Add</a> |
+<a th:href="@{cheese/remove}">Remove</a>
 
 </body>
 </html>

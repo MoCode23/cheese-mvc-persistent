@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace = "fragments :: head"></head>
+<body class = "container body-content">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method = "post">
+    <div th:each = "cheese : ${cheeses}" class = "checkbox">
+        <!-- Uses cheese.name to display cheese name on remove form and uses cheese.id to remove unique cheese from list
+        make sure name in input(cheeseIds) matches name in controller-->
+        <input type = "checkbox" name = "ids" th:value="${cheese.id}" th:id="${cheese.id}" />
+        <label th:for="${cheese.id}" th:text="${cheese.name}"></label>
+        <br />
+    </div>
+    <input type ="submit" value = "Remove Cheese"/>
+
+</form>
+
+</body>
+</html>
