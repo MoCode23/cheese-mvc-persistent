@@ -7,7 +7,7 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 
-<!--th:object specified to ${cheese} makes form specific to cheese and helps reduce necessary syntax in the form-->
+<!--th:object specified to ${cheese} makes form specific to cheese and helps reduce needed syntax in the form-->
 <!--th:for and th:field *{} are simplified by using th:object they both refer directly to attributes in Cheese.Java -->
 <form method = "post" style="max-width:600px;" th:object="${cheese}">
     <div class = "form-group">

@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "cheese")
 public class CheeseController {
-    //Autowired does all the work of initializing and injecting data into the CheeseDao.
+    //Autowired does the work of initializing and injecting data into the CheeseDao.
     @Autowired
     //Spring recognizes this as a CrudRepository
     CheeseDao cheeseDao;
