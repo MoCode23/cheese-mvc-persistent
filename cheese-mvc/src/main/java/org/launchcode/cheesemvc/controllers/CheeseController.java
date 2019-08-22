@@ -96,34 +96,39 @@ public class CheeseController {
         return "cheese/index";
     }
 
-    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
-    public String displayEditCheeseForm(Model model, @PathVariable int cheeseId) {
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    public String displayEditCheeseForm(Model model, @PathVariable int id) {
 
         model.addAttribute("title", "Edit Cheese");
-        model.addAttribute("cheese", cheeseDao.findOne(cheeseId));
+        model.addAttribute("cheese", cheeseDao.findOne(id));
         model.addAttribute("categories", categoryDao.findAll());
+
+
         return "cheese/edit";
     }
 
-   @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
-    public String processEditForm(Model model, @PathVariable int cheeseId,
-                                  @ModelAttribute  @Valid Cheese newCheese,
-                                  @RequestParam int categoryId,
-                                  Errors errors) {
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+    public String processEditCheeseForm(Model model, Errors errors, @ModelAttribute @Valid Cheese cheese,
+                                        @PathVariable int id){
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
+            model.addAttribute("title", "Edit Cheese");
+            model.addAttribute("cheese", cheeseDao.findOne(id));
+            model.addAttribute("categories", categoryDao.findAll());
+
             return "cheese/edit";
         }
 
-       Cheese cheese = cheeseDao.findOne(cheeseId);
 
-            cheese.setName(newCheese.getName());
-            cheese.setDescription(newCheese.getDescription());
-            cheese.setCategory(categoryDao.findOne(categoryId));
-            cheeseDao.save(cheese);
+        /*cheese.setCategory();
+        cheese.setName();
+        cheese.setDescription();
+        cheeseDao.save(cheese);*/
 
-        return "redirect:/cheese";
+        return "redirect:";
     }
+
+
 }
+
 

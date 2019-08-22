@@ -1,7 +1,6 @@
 package org.launchcode.cheesemvc.models;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 
