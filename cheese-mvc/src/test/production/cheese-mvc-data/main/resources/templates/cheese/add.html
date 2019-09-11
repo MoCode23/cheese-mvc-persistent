@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class = "container body-content">
+<!-- th:text="${title}" gets info from cheese controller add.Attribute and inserts value into view.-->
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+
+<!--th:object specified to ${cheese} makes form specific to cheese and helps reduce needed syntax in the form-->
+<!--th:for and th:field *{} are simplified by using th:object they both refer directly to attributes in Cheese.Java -->
+<form method = "post" style="max-width:600px;" th:object="${cheese}">
+    <div class = "form-group">
+        <label th:for="name">Name</label>
+           <input class ="form-control" th:field="*{name}" />
+        <!--th:errors links to name and links to Error error in controller. Class is used for css styling-->
+            <span th:errors="*{name}" class="errors"></span>
+    </div>
+    <div class = "form-group">
+        <label th:for="description">Description</label>
+            <input class = "form-control" th:field="*{description}" />
+            <span th:errors="*{description}" class="errors"></span>
+    </div>
+    <div class = "form-group">
+        <label th:for="type">Type</label>
+        <select name="categoryId">
+       <!--th:each is a for loop to loop over options in categories in CheeseControl processAddCheeseForm.
+            th:text displays name of the category thanks to getter in model.
+            th:value is what is submitted in the form.-->
+            <option th:each="category : ${categories}"
+                    th:text="${category.name}"
+                    th:value="${category.id}"> </option>
+        </select>
+
+    </div>
+
+    <input type = "submit" value = "Add Cheese" />
+</form>
+
+</body>
+</html>

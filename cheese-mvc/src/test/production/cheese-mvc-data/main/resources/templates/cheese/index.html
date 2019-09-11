@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class = "container body-content">
+<!-- th:text="${title}" gets info from cheese controller add.Attribute and inserts value into view.-->
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!-- If ${cheeses} doesn't exist display message in <p> tags
+     also calls cheeses.size, because cheeses is a list, to make sure list isn't empty.-->
+<p th:unless="${cheeses} and ${cheeses.size()}"> No Cheese!</p>
+
+<table class = "table">
+    <tr>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+    </tr>
+    <!--th:each is for loop. cheese is the temp variable and ${cheeses} is in controller.-->
+    <tr th:each="cheese : ${cheeses}">
+        <td> <a th:href = "@{'/cheese/edit/' + ${cheese.id}}"> Edit </a> </td>
+        <!--calling the name and description fields in model-->
+        <td th:text="${cheese.name}"></td>
+        <td th:text="${cheese.description}"></td>
+        <td th:text="${cheese.category.getName()}"></td>
+    </tr>
+</table>
+
+<a th:href="@{cheese/add}">Add</a> |
+<a th:href="@{cheese/remove}">Remove</a>
+
+</body>
+</html>
